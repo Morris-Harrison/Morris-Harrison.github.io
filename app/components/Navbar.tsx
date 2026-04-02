@@ -25,7 +25,7 @@ export default function Navbar() {
     }`}>
       <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
         <Link
-          href="/"
+          href="/?from=nav"
           className="text-2xl italic text-white hover:text-blue-400 transition"
           onClick={(e) => {
             if (pathname === "/") {
@@ -40,7 +40,7 @@ export default function Navbar() {
         </Link>
         <div className="flex gap-8">
           <Link
-            href="/"
+            href="/?from=nav"
             className="text-white hover:text-blue-400 transition font-medium"
             onClick={(e) => {
               if (pathname === "/") {

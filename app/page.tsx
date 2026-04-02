@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { FaExternalLinkAlt, FaGithub, FaEnvelope } from "react-icons/fa";
 import { BackgroundPaths } from "./components/BackgroundPaths";
+import { useSearchParams } from "next/navigation";
 
 interface Project {
   id: string;
@@ -27,8 +28,8 @@ const Typewriter = dynamic(() => import("react-typewriter-effect"), {
 
 const TITLE_SPEED = 100;
 const SUBTITLE_SPEED = 16;
-// About typewriter delay in ms per character (slightly faster than before)
-const ABOUT_BODY_SPEED = 24;
+// About typewriter delay in ms per character (1.2x faster than before)
+const ABOUT_BODY_SPEED = 20;
 
 const SUBTITLE_TEXT =
   "A Software Developer from Nanaimo BC Specializing" +
@@ -48,25 +49,25 @@ const ABOUT_TOKENS = [
   },
   {
     type: "text" as const,
-    text: " and my Complete ",
+    text: ", ",
   },
   {
     type: "link" as const,
-    text: "Skillset",
+    text: "Complete Skillset",
     href: "/skills",
   },
   {
     type: "text" as const,
-    text: ", feel free to ",
+    text: ", and ",
   },
   {
     type: "link" as const,
-    text: "Contact me",
+    text: "Contact Me",
     href: "/#contact",
   },
   {
     type: "text" as const,
-    text: " for any Freelance inquiries.",
+    text: " for all Freelance Inquiries.",
   },
 ];
 
@@ -110,26 +111,43 @@ export default function Home() {
   const [titleDone, setTitleDone] = useState(false);
   const [subtitleDone, setSubtitleDone] = useState(false);
   const [aboutChars, setAboutChars] = useState(0);
+  const searchParams = useSearchParams();
+  const fromNav = searchParams.get("from") === "nav";
 
   // Approximate when the title typewriter has finished so we can trigger the subtitle
   useEffect(() => {
+    if (fromNav) {
+      setTitleDone(true);
+      return;
+    }
+
     const titleText = "Hi, I'm Morris";
     const typeSpeedMs = TITLE_SPEED;
     const totalDuration = titleText.length * typeSpeedMs;
     const timeout = setTimeout(() => setTitleDone(true), totalDuration + 200);
     return () => clearTimeout(timeout);
-  }, []);
+  }, [fromNav]);
 
   useEffect(() => {
-    if (!titleDone) return;
+    if (!titleDone && !fromNav) return;
+
+    if (fromNav) {
+      setSubtitleDone(true);
+      return;
+    }
 
     const totalDuration = SUBTITLE_TEXT.length * SUBTITLE_SPEED;
     const timeout = setTimeout(() => setSubtitleDone(true), totalDuration + 200);
     return () => clearTimeout(timeout);
-  }, [titleDone]);
+  }, [titleDone, fromNav]);
 
   useEffect(() => {
-    if (!subtitleDone) return;
+    if (!subtitleDone && !fromNav) return;
+
+    if (fromNav) {
+      setAboutChars(ABOUT_TOTAL_LENGTH);
+      return;
+    }
 
     setAboutChars(0);
     const interval = setInterval(() => {
@@ -143,9 +161,9 @@ export default function Home() {
     }, ABOUT_BODY_SPEED);
 
     return () => clearInterval(interval);
-  }, [subtitleDone]);
+  }, [subtitleDone, fromNav]);
 
-  const aboutDone = aboutChars >= ABOUT_TOTAL_LENGTH;
+  const aboutDone = fromNav || aboutChars >= ABOUT_TOTAL_LENGTH;
 
   // Lock scrolling on the home page until the About text has fully typed
   useEffect(() => {
@@ -197,17 +215,25 @@ export default function Home() {
               <div className="w-full md:w-2/3">
                 <div className="w-full max-w-5xl rounded-xl px-6 py-5 shadow-md shadow-black/40 bg-gradient-to-r from-black/10 via-black/90 to-black/10">
                   <h1 className="text-6xl md:text-8xl font-bold text-white mb-4 flex items-baseline gap-2 whitespace-nowrap">
-                    <Typewriter text="Hi, I'm Morris" typeSpeed={TITLE_SPEED} cursor={false} />
-                    <span className={titleDone ? "cursor-blink-slow" : "cursor-blink-fast"}>_</span>
+                    {fromNav ? (
+                      "Hi, I'm Morris _"
+                    ) : (
+                      <>
+                        <Typewriter text="Hi, I'm Morris" typeSpeed={TITLE_SPEED} cursor={false} />
+                        <span className={titleDone ? "cursor-blink-slow" : "cursor-blink-fast"}>_</span>
+                      </>
+                    )}
                   </h1>
                   <div className="text-xl md:text-2xl text-slate-200 max-w-none whitespace-pre-line min-h-[4.5rem]">
-                    {titleDone && (
-                      <Typewriter
-                        text={SUBTITLE_TEXT}
-                        typeSpeed={SUBTITLE_SPEED}
-                        cursor={false}
-                      />
-                    )}
+                    {fromNav
+                      ? SUBTITLE_TEXT
+                      : titleDone && (
+                          <Typewriter
+                            text={SUBTITLE_TEXT}
+                            typeSpeed={SUBTITLE_SPEED}
+                            cursor={false}
+                          />
+                        )}
                   </div>
                 </div>
               </div>
@@ -231,7 +257,9 @@ export default function Home() {
           <div className="max-w-3xl mx-auto w-full">
             <div className="inline-block w-full space-y-4 rounded-xl px-6 py-5 shadow-md shadow-black/40 bg-gradient-to-r from-black/40 via-black/95 to-black/40 h-[130px] overflow-hidden">
               <div className="text-lg md:text-xl text-slate-100 text-left">
-                {subtitleDone && <p>{renderAboutTyped(aboutChars)}</p>}
+                {(subtitleDone || fromNav) && (
+                  <p>{renderAboutTyped(fromNav ? ABOUT_TOTAL_LENGTH : aboutChars)}</p>
+                )}
               </div>
             </div>
           </div>
