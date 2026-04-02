@@ -14,9 +14,9 @@ export default function Footer({
   email = "morris@example.com",
 }: FooterProps) {
   return (
-    <footer className="bg-slate-900/50 border-t border-slate-700 py-12 mt-20">
+    <footer className="bg-black border-t border-white/30 py-4 mt-10">
       <div className="max-w-4xl mx-auto px-6">
-        <div className="flex flex-col items-center justify-center gap-8">
+        <div className="flex flex-col items-center justify-center gap-4">
           {/* Social Media Icons */}
           <div className="flex gap-6">
             {github && (

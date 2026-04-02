@@ -34,4 +34,45 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: 'Arsenal', sans-serif;
+  /* Keep vertical scrollbar space reserved to avoid layout shift on load */
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes cursor-blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  50.01%, 100% {
+    opacity: 0;
+  }
+}
+
+.cursor-blink-fast {
+  display: inline-block;
+  animation: cursor-blink 0.9s step-start infinite;
+}
+
+.cursor-blink-slow {
+  display: inline-block;
+  animation: cursor-blink 1.8s step-start infinite;
+}
+
+@keyframes aurora-stable {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -20px, 0) scale(1.05);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
 }
