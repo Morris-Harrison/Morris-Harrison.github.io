@@ -1,5 +1,3 @@
-import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from "react-icons/fa";
-
 interface FooterProps {
   github?: string;
   linkedin?: string;
@@ -12,39 +10,11 @@ export default function Footer({
   email = "mailto:morriskharrison@outlook.com",
 }: FooterProps) {
   return (
-    <footer className="bg-black border-t border-white/30 py-4 mt-10">
-      <div className="max-w-4xl mx-auto px-6">
-        <div className="flex flex-col items-center justify-center gap-4">
-          {/* Social Media Icons */}
-          <div className="flex gap-6">
-            
-            {email && (
-              <a
-                href={`mailto:${email}`}
-                className="text-slate-400 hover:text-blue-400 transition text-2xl"
-                aria-label="Email"
-              >
-                <FaEnvelope />
-              </a>
-            )}
-            {github && (
-              <a
-                href={github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate-400 hover:text-blue-400 transition text-2xl"
-                aria-label="GitHub"
-              >
-                <FaGithub />
-              </a>
-            )}
-          </div>
-
-          {/* Copyright */}
-          <p className="text-slate-400 text-center">
-            2026 Morris Harrison
-          </p>
-        </div>
+    <footer className="bg-black border-t border-white mt-8">
+      <div className="max-w-6xl mx-auto px-6 py-2 flex items-center justify-center">
+        <p className="text-white text-sm">
+          2026 Morris Harrison
+        </p>
       </div>
     </footer>
   );

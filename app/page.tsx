@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { FaExternalLinkAlt } from "react-icons/fa";
+import { FaExternalLinkAlt, FaGithub, FaEnvelope } from "react-icons/fa";
 import { BackgroundPaths } from "./components/BackgroundPaths";
 
 interface Project {
@@ -237,13 +237,13 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="px-6 py-12 -mt-16">
+        <section className="px-6 pt-8 pb-0 -mt-16">
           <div className="max-w-4xl mx-auto w-full text-center">
-            <div className="inline-block rounded-xl px-4 py-3 mt-6 mb-12 shadow-md shadow-black/40 bg-gradient-to-r from-black/10 via-black/90 to-black/10">
+            <div className="inline-block rounded-xl px-4 py-3 mt-4 mb-6 shadow-md shadow-black/40 bg-gradient-to-r from-black/10 via-black/90 to-black/10">
               <h2 className="text-5xl font-bold text-white text-center">Featured Projects</h2>
             </div>
             {!loading && projects.length > 0 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-9">
                 {projects.map((project) => (
                   <div
                     key={project.id}
@@ -299,6 +299,31 @@ export default function Home() {
                 <p className="text-slate-400">Check the API or database seeding.</p>
               </div>
             )}
+
+            {/* Contact icons below featured projects */}
+            <div className="mt-6 mb-[20px] inline-block rounded-xl px-6 py-4 shadow-md shadow-black/40 bg-gradient-to-r from-black/40 via-black/90 to-black/40">
+              <div className="text-slate-100 italic text-4xl text-center mb-3">
+                Keep in Touch
+              </div>
+              <div className="flex items-center justify-center gap-6">
+                <a
+                  href="mailto:morriskharrison@outlook.com"
+                  className="text-white hover:text-blue-400 transition text-2xl"
+                  aria-label="Email"
+                >
+                  <FaEnvelope />
+                </a>
+                <a
+                  href="https://github.com/morris-harrison"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-blue-400 transition text-2xl"
+                  aria-label="GitHub"
+                >
+                  <FaGithub />
+                </a>
+              </div>
+            </div>
           </div>
         </section>
         <Footer />

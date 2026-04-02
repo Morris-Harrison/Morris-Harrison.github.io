@@ -47,18 +47,6 @@ html {
   overflow: hidden;
 }
 
-/* Hide scrollbar visuals but preserve scrolling behavior */
-html::-webkit-scrollbar,
-body::-webkit-scrollbar {
-  display: none;
-}
-
-html,
-body {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
 @keyframes cursor-blink {
   0%, 50% {
     opacity: 1;
