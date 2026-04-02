@@ -47,7 +47,6 @@ export default function Projects() {
   const categories = Array.from(new Set(projects.map((p) => p.category).filter(Boolean))) as string[];
   const languages = Array.from(new Set(projects.map((p) => p.language).filter(Boolean))) as string[];
   const hasNewFeatures = projects.some((p) => p.new_feature);
-  const hasFeatured = projects.some((p) => p.featured);
 
   const filteredProjects = projects.filter((project) => {
     const matchesCategory = !selectedCategory || project.category === selectedCategory;
@@ -56,6 +55,12 @@ export default function Projects() {
       (selectedFeature === "new" && project.new_feature) ||
       (selectedFeature === "featured" && project.featured);
     return matchesCategory && matchesLanguage && matchesFeature;
+  });
+
+  const sortedProjects = [...filteredProjects].sort((a, b) => {
+    const aFeatured = a.featured ? 1 : 0;
+    const bFeatured = b.featured ? 1 : 0;
+    return bFeatured - aFeatured;
   });
 
   const featureLabel =
@@ -80,13 +85,16 @@ export default function Projects() {
         <Navbar />
         <section className="px-6 pt-20 pb-0 flex-1">
           <div className="max-w-4xl mx-auto w-full">
-            <h2 className="text-5xl font-bold text-white mb-12">{headingTitle}</h2>
+            <h2 className="text-5xl font-bold text-white mb-2">{headingTitle}</h2>
+            <p className="text-slate-400 text-lg mb-10">
+              All of my Projects are Open-Source Live Websites or Applications Available for Download.
+            </p>
             
             {/* Filter Buttons */}
             {!loading && projects.length > 0 && (
               <div className="mb-8 space-y-4">
                 {/* Category + Feature Filter */}
-                {(categories.length > 0 || hasNewFeatures || hasFeatured) && (
+                {(categories.length > 0 || hasNewFeatures) && (
                   <div>
                     <p className="text-slate-400 text-sm mb-2">Category:</p>
                     <div className="flex flex-wrap gap-2">
@@ -94,10 +102,10 @@ export default function Projects() {
                         <>
                           <button
                             onClick={() => setSelectedCategory(null)}
-                            className={`px-4 py-2 rounded-lg text-sm font-semibold transition cursor-pointer ${
+                            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 cursor-pointer ring-offset-background hover:ring-primary/90 hover:ring-2 hover:ring-offset-2 ${
                               selectedCategory === null
                                 ? "bg-blue-600 text-white"
-                                : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+                                : "bg-black text-white"
                             }`}
                           >
                             All Categories
@@ -105,11 +113,15 @@ export default function Projects() {
                           {categories.map((cat) => (
                             <button
                               key={cat}
-                              onClick={() => setSelectedCategory(cat)}
-                              className={`px-4 py-2 rounded-lg text-sm font-semibold transition cursor-pointer ${
+                              onClick={() =>
+                                setSelectedCategory((current) =>
+                                  current === cat ? null : cat
+                                )
+                              }
+                              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 cursor-pointer ring-offset-background hover:ring-primary/90 hover:ring-2 hover:ring-offset-2 ${
                                 selectedCategory === cat
                                   ? "bg-blue-600 text-white"
-                                  : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+                                  : "bg-black text-white"
                               }`}
                             >
                               {cat}
@@ -118,32 +130,18 @@ export default function Projects() {
                         </>
                       )}
 
-                      {(hasNewFeatures || hasFeatured) && (
+                      {hasNewFeatures && (
                         <>
-                          {hasNewFeatures && (
-                            <button
-                              onClick={() => setSelectedFeature("new")}
-                              className={`px-4 py-2 rounded-lg text-sm font-semibold transition cursor-pointer ${
-                                selectedFeature === "new"
-                                  ? "bg-green-600 text-white"
-                                  : "bg-slate-700 text-slate-300 hover:bg-slate-600"
-                              }`}
-                            >
-                              New Features
-                            </button>
-                          )}
-                          {hasFeatured && (
-                            <button
-                              onClick={() => setSelectedFeature("featured")}
-                              className={`px-4 py-2 rounded-lg text-sm font-semibold transition cursor-pointer ${
-                                selectedFeature === "featured"
-                                  ? "bg-yellow-600 text-white"
-                                  : "bg-slate-700 text-slate-300 hover:bg-slate-600"
-                              }`}
-                            >
-                              Featured
-                            </button>
-                          )}
+                          <button
+                            onClick={() => setSelectedFeature("new")}
+                            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 cursor-pointer ring-offset-background hover:ring-primary/90 hover:ring-2 hover:ring-offset-2 ${
+                              selectedFeature === "new"
+                                ? "bg-blue-600 text-white"
+                                : "bg-black text-white"
+                            }`}
+                          >
+                            New Features
+                          </button>
                         </>
                       )}
                     </div>
@@ -157,10 +155,10 @@ export default function Projects() {
                     <div className="flex flex-wrap gap-2">
                       <button
                         onClick={() => setSelectedLanguage(null)}
-                        className={`px-4 py-2 rounded-lg text-sm font-semibold transition cursor-pointer ${
+                        className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 cursor-pointer ring-offset-background hover:ring-primary/90 hover:ring-2 hover:ring-offset-2 ${
                           selectedLanguage === null
                             ? "bg-blue-600 text-white"
-                            : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+                            : "bg-black text-white"
                         }`}
                       >
                         All
@@ -168,11 +166,15 @@ export default function Projects() {
                       {languages.map((lang) => (
                         <button
                           key={lang}
-                          onClick={() => setSelectedLanguage(lang)}
-                          className={`px-4 py-2 rounded-lg text-sm font-semibold transition cursor-pointer ${
+                          onClick={() =>
+                            setSelectedLanguage((current) =>
+                              current === lang ? null : lang
+                            )
+                          }
+                          className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 cursor-pointer ring-offset-background hover:ring-primary/90 hover:ring-2 hover:ring-offset-2 ${
                             selectedLanguage === lang
                               ? "bg-blue-600 text-white"
-                              : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+                              : "bg-black text-white"
                           }`}
                         >
                           {lang}
@@ -188,9 +190,9 @@ export default function Projects() {
               <div className="text-center py-12">
                 <p className="text-slate-400 text-xl">Loading projects...</p>
               </div>
-            ) : filteredProjects.length > 0 ? (
+            ) : sortedProjects.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-9">
-                {filteredProjects.map((project) => (
+                {sortedProjects.map((project) => (
                   <div
                     key={project.id}
                     className="group bg-slate-800 border border-slate-700 rounded-xl overflow-hidden hover:border-blue-500 transition hover:shadow-lg hover:shadow-blue-500/20 hover:-translate-y-1"

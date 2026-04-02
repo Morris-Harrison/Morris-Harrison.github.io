@@ -1,7 +1,6 @@
-import Link from "next/link";
 import Image from "next/image";
-import { FaPython, FaJs, FaNode, FaEnvelope, FaGithub } from "react-icons/fa";
-import { SiTypescript, SiDjango, SiPostgresql, SiMongodb } from "react-icons/si";
+import { FaNode, FaEnvelope, FaGithub } from "react-icons/fa";
+import { SiDjango, SiPostgresql, SiMongodb } from "react-icons/si";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { LightWavesBackground } from "../components/LightWavesBackground";
@@ -10,28 +9,35 @@ export default function Skills() {
   const languages = [
     { 
       name: "Python", 
-      icon: FaPython,
+      icon: "/python-svgrepo-com.svg",
       description: "Data processing, scripting, and backend development",
       proficiency: "Advanced",
       frameworks: [
         { name: "Django", icon: SiDjango },
         { name: "PostgreSQL", icon: SiPostgresql },
+        { name: "CustomTkinter", icon: SiPostgresql },
+        { name: "Numpy", icon: SiPostgresql },
+        { name: "PyGame", icon: SiPostgresql },
       ]
     },
     { 
       name: "JavaScript", 
-      icon: FaJs,
+      icon: "/js-svgrepo-com.svg",
       description: "Interactive frontend experiences and web applications",
       proficiency: "Advanced",
       frameworks: [
         { name: "React", icon: "/react.svg" },
         { name: "Next.js", icon: "/next.svg" },
         { name: "Tailwind", icon: "/tailwind-css.svg" },
+        { name: "Three JS", icon: "/tailwind-css.svg" },
+        { name: "express", icon: "/tailwind-css.svg" },
+        { name: "electron", icon: "/tailwind-css.svg" },
+        { name: "shadcn", icon: "/tailwind-css.svg" },
       ]
     },
     { 
       name: "TypeScript", 
-      icon: SiTypescript,
+      icon: "/typescript-logo-svgrepo-com.svg",
       description: "Type-safe development for scalable applications",
       proficiency: "Advanced",
       frameworks: [
@@ -44,34 +50,40 @@ export default function Skills() {
     },
   ];
 
+  const databases = [
+    { name: "PostgreSQL", icon: SiPostgresql },
+    { name: "MongoDB", icon: SiMongodb },
+    { name: "MySQL", icon: "/mysql-2.svg" },
+  ];
+
   const tools = [
-    { name: "VS Code", icon: "/vs-code.svg" },
-    { name: "JetBrains", icon: "/jetbrains.svg" },
-    { name: "Postman", icon: "/postman_logo_icon_248799.svg" },
-    { name: "VirtualBox", icon: "/virtualbox_logo_icon_249263.svg" },
-    { name: "Raspberry Pi", icon: "/raspberry_pi_logo_icon_144943.svg" },
+    { name: "VS Code", icon: "/vscode-svgrepo-com.svg" },
+    { name: "JetBrains", icon: "/jetbrains-svgrepo-com.svg" },
+    { name: "Postman", icon: "/postman-icon-svgrepo-com.svg" },
+    { name: "Git", icon: "/git-svgrepo-com.svg" },
+    { name: "BrowserStack", icon: "/browserstack-svgrepo-com.svg" },
   ];
 
   const deploymentServices = [
     
-    { name: "Digital Ocean", icon: "/digitalocean.svg" },
-    { name: "AWS EC2", icon: "/aws.svg" },
+    { name: "Digital Ocean", icon: "/digital-ocean-svgrepo-com.svg" },
+    { name: "AWS EC2", icon: "/aws-svgrepo-com.svg" },
     { name: "Vercel", icon: "/vercel.svg" },
     { name: "Render", icon: "/Render Symbol SVG.svg" },
-    { name: "Pages", icon: "/GitHub_Invertocat_White.svg" },
+    { name: "Pages", icon: "/github-142-svgrepo-com.svg" },
   ];
 
   const servicesIntegrations = [
-    { name: "Stripe", icon: "/stripe.svg" },
-    { name: "Namecheap", icon: "/namecheap.svg" },
-    { name: "GitHub", icon: "/GitHub_Invertocat_White.svg" },
-    { name: "Cloudflare", icon: "/cloudflare.svg" },
-    { name: "Google APIs", icon: "/googledev.png" },
+    { name: "Stripe", icon: "/stripe-svgrepo-com.svg" },
+    { name: "Namecheap", icon: "/namecheap-svgrepo-com.svg" },
+    { name: "GitHub", icon: "/github-142-svgrepo-com.svg" },
+    { name: "Cloudflare", icon: "/cloudflare-svgrepo-com.svg" },
+    { name: "Google APIs", icon: "/google-developers-svgrepo-com.svg" },
   ];
 
   const aiAgents = [
-    { name: "Claude Sonnet/Haiku 5", icon: "/claude.svg" },
-    { name: "Perplexity", icon: "/perplexity.svg" },
+    { name: "Claude Sonnet/Haiku 5", icon: "/claude-color.svg" },
+    { name: "Perplexity", icon: "/perplexity-color.svg" },
     { name: "Copilot Student", icon: "/github-copilot.svg" },
     { name: "Ollama", icon: "/ollama-icon.svg" },
     { name: "GPT 5", icon: "/gpt.svg" },
@@ -87,30 +99,40 @@ export default function Skills() {
           <div className="max-w-4xl mx-auto w-full">
             <h1 className="text-7xl font-bold text-white mb-6">Skillset & Tech Stack</h1>
             <p className="text-2xl text-slate-300 leading-relaxed">
-              I work with modern technologies to build scalable, performant web applications. 
-              Here's a breakdown of my technical expertise and the tools I'm proficient with.
+              I work with Industry Standard Dev Tools to Build and Deploy Modern Full-Stack Applications.
             </p>
+    
           </div>
         </section>
 
         {/* Skills Grid Section */}
         <section className="px-6 py-20">
           <div className="max-w-4xl mx-auto w-full">
-            <h2 className="text-5xl font-bold text-white mb-12">Languages & Frameworks</h2>
+            <h2 className="text-5xl font-bold text-white mt-[-50px] mb-12">Languages & Frameworks</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {languages.map((lang) => (
                 <div
                   key={lang.name}
                   className="group relative bg-slate-800 border border-slate-700 rounded-xl p-8 hover:border-slate-600 transition hover:shadow-lg hover:shadow-slate-500/20 hover:-translate-y-1"
                 >
-                  <div className="text-6xl mb-4 group-hover:scale-110 transition transform">
-                    <lang.icon className="text-white" />
+                  <div
+                    className={`mb-4 group-hover:scale-110 transition transform ${
+                      lang.name === "TypeScript" ? "w-[56px] h-[56px]" : "w-16 h-16"
+                    }`}
+                  >
+                    <Image
+                      src={lang.icon}
+                      alt={lang.name}
+                      width={64}
+                      height={64}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-2">
                     {lang.name}
                   </h3>
                   <div className="flex justify-between items-center mb-4">
-                    <span className="text-sm text-black font-semibold">
+                    <span className="text-sm text-slate-300 font-semibold">
                       Proficiency
                     </span>
                     <span className="text-sm text-slate-300">
@@ -152,14 +174,51 @@ export default function Skills() {
           </div>
         </section>
 
-        {/* Tools & Soft Skills Section */}
-        <section className="px-6 pt-20 pb-0">
+        {/* Databases Section */}
+        <section className="px-6 pt-0 pb-0 mt-[-20px]">
           <div className="max-w-4xl mx-auto w-full">
-            <h2 className="text-5xl font-bold text-white mb-12">Tools & Skills</h2>
+            <h2 className="text-5xl font-bold text-white mb-8">Databases</h2>
+            <div className="bg-slate-800 border border-slate-700 rounded-xl p-8">
+              <div className="grid grid-cols-3 gap-8 mb-6">
+                {databases.map((db) => {
+                  const Icon = typeof db.icon === "function" ? db.icon : null;
+                  return (
+                    <div key={db.name} className="flex flex-col items-center gap-3">
+                      <div className="w-16 h-16 bg-slate-700 rounded-lg p-3 flex items-center justify-center">
+                        {Icon ? (
+                          <Icon className="w-10 h-10 text-white flex-shrink-0" />
+                        ) : (
+                          <Image
+                            src={db.icon as string}
+                            alt={db.name}
+                            width={48}
+                            height={48}
+                            className="w-full h-full object-contain invert"
+                          />
+                        )}
+                      </div>
+                      <span className="text-sm text-slate-300 text-center">{db.name}</span>
+                    </div>
+                  );
+                })}
+              </div>
+              <p className="text-slate-400 text-lg leading-relaxed">
+                Production-ready experience with relational and document databases, including schema design, indexing, and query optimization.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Tools & Soft Skills Section */}
+        <section className="px-6 pt-20 pb-0 mt-[-20px]">
+          <div className="max-w-4xl mx-auto w-full">
+            <h2 className="text-5xl font-bold text-white mb-12">Developer Tools</h2>
             <div className="space-y-8">
-              <div className="bg-slate-800 border border-slate-700 rounded-xl p-8">
-                <h3 className="text-2xl font-bold text-white mb-6">Code Editors & Dev Tools</h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-6">
+              {/* Combined tools container */}
+              <div className="bg-slate-800 border border-slate-700 rounded-xl p-8 space-y-10">
+                <div>
+                  <h3 className="text-2xl font-bold text-white mb-6">Code Editors & Dev Tools</h3>
+                <div className="grid grid-cols-5 gap-6 mb-6">
                   {tools.map((tool) => (
                     <div key={tool.name} className="flex flex-col items-center gap-3">
                       <div className="w-12 h-12 bg-slate-700 rounded-lg p-2 flex items-center justify-center hover:bg-slate-600 transition">
@@ -168,7 +227,7 @@ export default function Skills() {
                           alt={tool.name}
                           width={32}
                           height={32}
-                          className="w-full h-full object-contain invert"
+                          className="w-full h-full object-contain"
                         />
                       </div>
                       <span className="text-sm text-slate-300 text-center">{tool.name}</span>
@@ -176,12 +235,12 @@ export default function Skills() {
                   ))}
                 </div>
                 <p className="text-slate-400 text-lg leading-relaxed">
-                  Git, GitHub, Docker, Firebase, AWS, Vercel, Netlify, Prisma ORM, 
-                  GraphQL, Webpack, npm, yarn, and various development workflows.
+                  3 Years of Programming Experience using Visual Studio Code, Git, and Postman, with a new passion for JetBrains IDE's and BrowserStack.
                 </p>
-              </div>
-              <div className="bg-slate-800 border border-slate-700 rounded-xl p-8">
-                <h3 className="text-2xl font-bold text-white mb-6">Deployment Platforms</h3>
+                </div>
+
+                <div>
+                  <h3 className="text-2xl font-bold text-white mb-6">Deployment Platforms</h3>
                 <div className="grid grid-cols-5 gap-6 mb-6">
                   {deploymentServices.map((service) => (
                     <div key={service.name} className="flex flex-col items-center gap-3">
@@ -191,7 +250,7 @@ export default function Skills() {
                           alt={service.name}
                           width={32}
                           height={32}
-                          className="w-full h-full object-contain invert"
+                          className="w-full h-full object-contain"
                         />
                       </div>
                       <span className="text-sm text-slate-300 text-center">{service.name}</span>
@@ -199,40 +258,34 @@ export default function Skills() {
                   ))}
                 </div>
                 <p className="text-slate-400 text-lg leading-relaxed">
-                  Experienced with modern deployment platforms for fast, reliable application hosting and continuous deployment workflows.
+                  Dozens of Projects Deployed with Modern Platforms such as Digital Ocean and AWS EC2 + nginx, as well as Express Deployment through Vercel, Render, and GitHub Pages.
                 </p>
-              </div>
-              <div className="bg-slate-800 border border-slate-700 rounded-xl p-8">
-                <h3 className="text-2xl font-bold text-white mb-6">Web Services & Integrations</h3>
+                </div>
+
+                <div>
+                  <h3 className="text-2xl font-bold text-white mb-6">Web Services & Integrations</h3>
                 <div className="grid grid-cols-5 gap-6 mb-6">
-                  {servicesIntegrations.map((service) => {
-                    const Icon = typeof service.icon === 'function' ? service.icon : null;
-                    return (
-                      <div key={service.name} className="flex flex-col items-center gap-3">
-                        <div className="w-12 h-12 bg-slate-700 rounded-lg p-2 flex items-center justify-center hover:bg-slate-600 transition">
-                          {Icon ? (
-                            <Icon className="w-8 h-8 text-white flex-shrink-0" />
-                          ) : (
-                            <Image 
-                              src={service.icon as string} 
-                              alt={service.name}
-                              width={32}
-                              height={32}
-                              className={`w-full h-full object-contain ${service.name === "Google APIs" ? "grayscale brightness-0 invert" : "invert"}`}
-                            />
-                          )}
-                        </div>
-                        <span className="text-sm text-slate-300 text-center">{service.name}</span>
+                  {servicesIntegrations.map((service) => (
+                    <div key={service.name} className="flex flex-col items-center gap-3">
+                      <div className="w-12 h-12 bg-slate-700 rounded-lg p-2 flex items-center justify-center hover:bg-slate-600 transition">
+                        <Image 
+                          src={service.icon}
+                          alt={service.name}
+                          width={32}
+                          height={32}
+                          className="w-full h-full object-contain"
+                        />
                       </div>
-                    );
-                  })}
+                      <span className="text-sm text-slate-300 text-center">{service.name}</span>
+                    </div>
+                  ))}
                 </div>
                 <p className="text-slate-400 text-lg leading-relaxed">
-                  Integration with payment systems, e-commerce platforms, and domain management services for complete application solutions.
+                  7 Domains Managed through Namecheap with Security provided by Cloudflare, in addition to the incorperation of API's such as Stripe Payment and Google Maps Adress Autocomplete for my Online Store.
                 </p>
-              </div>
-              <div className="bg-slate-800 border border-slate-700 rounded-xl p-8">
-                <h3 className="text-2xl font-bold text-white mb-6">AI Agents</h3>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-white mb-6">AI Agents</h3>
                 <div className="grid grid-cols-5 gap-6 mb-6">
                   {aiAgents.map((agent) => (
                     <div key={agent.name} className="flex flex-col items-center gap-3">
@@ -242,7 +295,13 @@ export default function Skills() {
                           alt={agent.name}
                           width={32}
                           height={32}
-                          className="w-full h-full object-contain invert"
+                          className={`w-full h-full object-contain ${
+                            agent.name === "Copilot Student" || agent.name === "Ollama"
+                              ? "brightness-0"
+                              : agent.name === "GPT 5"
+                              ? "invert"
+                              : ""
+                          }`}
                         />
                       </div>
                       <span className="text-sm text-slate-300 text-center">{agent.name}</span>
@@ -250,14 +309,22 @@ export default function Skills() {
                   ))}
                 </div>
                 <p className="text-slate-400 text-lg leading-relaxed">
-                  Proficient with AI-powered development tools and coding assistants to enhance productivity, write cleaner code, and accelerate development workflows.
+                  Advanced AI Manipulation with Premium Agents provided by GitHub Education including Claude 5, Perplexity 5, and GPT 5, as well as offline AI through Ollama.
                 </p>
+                </div>
               </div>
               <div className="bg-slate-800 border border-slate-700 rounded-xl p-8">
                 <h3 className="text-2xl font-bold text-white mb-6">Soft Skills</h3>
-                <p className="text-slate-300 text-lg leading-relaxed">
-                  Problem-solving, communication, teamwork, project management, code review, 
-                  mentoring, and a strong commitment to continuous learning and improvement.
+                <ul className="list-disc list-inside text-slate-300 text-lg mb-4 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
+                  <li>Problem-solving and analytical thinking</li>
+                  <li>Clear communication with technical and non-technical stakeholders</li>
+                  <li>Collaborative teamwork and pair programming</li>
+                  <li>Project ownership and time management</li>
+                  <li>Thoughtful code review and mentorship</li>
+                  <li>Continuous learning and self-improvement</li>
+                </ul>
+                <p className="text-slate-400 text-lg leading-relaxed">
+                  Together, these skills help me ship reliable software, work well with diverse teams, and keep improving as a developer.
                 </p>
               </div>
             </div>
