@@ -248,6 +248,7 @@ function HomeContent() {
                     fill
                     className="rounded-full object-cover shadow-2xl shadow-blue-500/20"
                     priority
+                    unoptimized
                   />
                   <div className="pointer-events-none absolute inset-0 rounded-full border-[3px] border-white border-t-transparent" />
                 </div>
