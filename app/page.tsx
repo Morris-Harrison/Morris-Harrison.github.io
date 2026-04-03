@@ -243,7 +243,7 @@ function HomeContent() {
               <div className="w-full md:w-1/3 flex justify-center md:justify-start">
                 <div className="relative w-64 h-64 md:w-80 md:h-80">
                   <Image
-                    src="/morrisharrison.jpg"
+                    src="/mkh.jpg"
                     alt="Morris Harrison"
                     fill
                     className="rounded-full object-cover shadow-2xl shadow-blue-500/20"
