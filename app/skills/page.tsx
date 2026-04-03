@@ -1,3 +1,4 @@
+import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaNode, FaEnvelope, FaGithub } from "react-icons/fa";
@@ -142,7 +143,10 @@ export default function Skills() {
                       <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                         <div className="space-y-2">
                           {lang.frameworks.slice(0, 7).map((fw) => {
-                            const Icon = typeof fw.icon === "function" ? fw.icon : null;
+                            const Icon =
+                              (typeof fw.icon === "function" ? fw.icon : null) as
+                                | React.ComponentType<{ className?: string }>
+                                | null;
                             return (
                               <div key={fw.name} className="flex items-center gap-2">
                                 {Icon ? (
@@ -165,7 +169,10 @@ export default function Skills() {
                         </div>
                         <div className="space-y-2">
                           {lang.frameworks.slice(7).map((fw) => {
-                            const Icon = typeof fw.icon === "function" ? fw.icon : null;
+                            const Icon =
+                              (typeof fw.icon === "function" ? fw.icon : null) as
+                                | React.ComponentType<{ className?: string }>
+                                | null;
                             return (
                               <div key={fw.name} className="flex items-center gap-2">
                                 {Icon ? (
@@ -190,7 +197,10 @@ export default function Skills() {
                     ) : (
                       <div className="space-y-2">
                         {lang.frameworks.map((fw) => {
-                          const Icon = typeof fw.icon === "function" ? fw.icon : null;
+                          const Icon =
+                            (typeof fw.icon === "function" ? fw.icon : null) as
+                              | React.ComponentType<{ className?: string }>
+                              | null;
                           return (
                             <div key={fw.name} className="flex items-center gap-2">
                               {Icon ? (
@@ -226,7 +236,10 @@ export default function Skills() {
             <div className="bg-slate-800 border border-slate-700 rounded-xl p-8">
               <div className="grid grid-cols-2 gap-8 mb-6 max-w-md mx-auto">
                 {databases.map((db) => {
-                  const Icon = typeof db.icon === "function" ? db.icon : null;
+                  const Icon =
+                    (typeof db.icon === "function" ? db.icon : null) as
+                      | React.ComponentType<{ className?: string }>
+                      | null;
                   return (
                     <div key={db.name} className="flex flex-col items-center gap-3">
                       <div className="w-16 h-16 bg-slate-700 rounded-lg p-3 flex items-center justify-center">

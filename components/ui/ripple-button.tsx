@@ -1,12 +1,12 @@
-'use client'
+"use client"
 
-import * as React from 'react'
+import * as React from "react"
 
-import { motion, type HTMLMotionProps, type Transition } from 'motion/react'
-import type { VariantProps } from 'class-variance-authority'
+import { motion, type Transition } from "motion/react"
+import type { VariantProps } from "class-variance-authority"
 
-import { cn } from '@/lib/utils'
-import { buttonVariants } from '@/components/ui/button'
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
 
 interface Ripple {
   id: number
@@ -14,27 +14,26 @@ interface Ripple {
   y: number
 }
 
-interface RippleButtonProps extends HTMLMotionProps<'button'>, VariantProps<typeof buttonVariants> {
+interface RippleButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
   children: React.ReactNode
   scale?: number
   transition?: Transition
 }
 
 function RippleButton({
-  ref,
   children,
   onClick,
   className,
   variant,
   size,
   scale = 10,
-  transition = { duration: 0.6, ease: 'easeOut' },
+  transition = { duration: 0.6, ease: "easeOut" },
   ...props
 }: RippleButtonProps) {
   const [ripples, setRipples] = React.useState<Ripple[]>([])
   const buttonRef = React.useRef<HTMLButtonElement>(null)
-
-  React.useImperativeHandle(ref, () => buttonRef.current as HTMLButtonElement)
 
   const createRipple = React.useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
     const button = buttonRef.current
@@ -69,13 +68,15 @@ function RippleButton({
     [createRipple, onClick]
   )
 
+  const MotionButton = motion.button as any
+
   return (
-    <motion.button
+    <MotionButton
       ref={buttonRef}
       data-slot='ripple-button'
       onClick={handleClick}
-      className={cn(buttonVariants({ variant, size }), 'relative overflow-hidden', className)}
-      {...props}
+      className={cn(buttonVariants({ variant, size }), "relative overflow-hidden", className)}
+      {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
     >
       {children}
       {ripples.map(ripple => (
@@ -91,7 +92,7 @@ function RippleButton({
           }}
         />
       ))}
-    </motion.button>
+    </MotionButton>
   )
 }
 

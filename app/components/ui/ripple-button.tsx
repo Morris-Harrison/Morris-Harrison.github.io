@@ -66,11 +66,10 @@ export function RippleButton({
       data-slot="ripple-button"
       onClick={handleClick}
       className={cn(
-        // Black button so it matches your theme
         'relative overflow-hidden inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-black text-white text-sm font-semibold transition hover:bg-black/80',
         className,
       )}
-      {...props}
+      {...(props as any)}
     >
       {children}
       {ripples.map(ripple => (

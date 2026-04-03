@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { FaExternalLinkAlt, FaGithub, FaEnvelope } from "react-icons/fa";
 import { BackgroundPaths } from "./components/BackgroundPaths";
@@ -22,7 +22,7 @@ interface Project {
   new_feature?: boolean;
 }
 
-const Typewriter = dynamic(() => import("react-typewriter-effect"), {
+const Typewriter = dynamic<any>(() => import("react-typewriter-effect"), {
   ssr: false,
 });
 
@@ -105,7 +105,7 @@ function renderAboutTyped(visibleChars: number) {
   return <>{parts}</>;
 }
 
-export default function Home() {
+function HomeContent() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [titleDone, setTitleDone] = useState(false);
@@ -360,5 +360,13 @@ export default function Home() {
         <Footer />
       </div>
     </>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={null}>
+      <HomeContent />
+    </Suspense>
   );
 }
